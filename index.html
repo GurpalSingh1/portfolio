@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gurpal Singh - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+            background-color: #ffffff;
+            color: #000000;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: #f0f0f0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #7a2ba3;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: inherit;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #8a3ab9;
+        }
+
+        .dropdown-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: inherit;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-left: auto; /* Shift button to the right */
+            transition: color 0.3s;
+        }
+
+        .btn {
+            background-color: #8a3ab9;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: background-color 0.3s, transform 0.3s;
+            text-decoration: none;
+            border: 2px solid transparent;
+        }
+
+        .btn:hover {
+            background-color: #7a2ba3;
+            transform: scale(1.05);
+        }
+
+        .section {
+            padding: 50px 20px;
+            margin-top: 60px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            background-color: #fafafa;
+            transition: border-color 0.3s, background-color 0.3s;
+            opacity: 0; /* Initially hidden */
+            transform: translateY(20px); /* Start below the view */
+            transition: opacity 0.5s, transform 0.5s; /* Animation timing */
+        }
+
+        .section.visible {
+            opacity: 1; /* Show section */
+            transform: translateY(0); /* Move to original position */
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background-color: #f0f0f0;
+            color: #000000;
+        }
+
+        /* Dark mode styling */
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .navbar.dark-mode {
+            background-color: #222;
+            
+        }
+
+        .section.dark-mode {
+            background-color: #222;
+            border-color: #d3d3d3;
+        }
+
+        footer.dark-mode {
+            background-color: #1f1f1f;
+            color: #ffffff;
+        }
+
+        .nav-links a.dark-mode {
+            color: #ffffff; /* Set link color in dark mode */
+        }
+
+        /* Dark mode for dropdown button */
+        .dropdown-btn.dark-mode {
+            color: #ffffff;
+        }
+
+         
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background-color: #b697c5;
+                z-index: 999;
+                animation: dropdown 0.3s ease-out forwards;
+                box-shadow: #7a2ba3;
+                 
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .dropdown-btn {
+                display: block;
+            }
+        }
+
+        /* Dropdown animation */
+        @keyframes dropdown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .h1, .h2 {
+            font-weight: 200;
+            margin: 0.4em 0;
+        }
+        
+
+        .h1 { font-size: 3.5em; }
+        .h2 {
+            color: #888;
+            font-size: 2em;
+        }
+        .ah2 {
+        position: relative;
+        display: inline-block; /* Make it inline for proper width */
+        padding-bottom: 5px; /* Add some space for the underline */
+    }
+
+    .ah2::after {
+        content: "";
+        display: block;
+        height: 2px; /* Adjust height for thickness */
+        width: 100%; /* Full width */
+        background-color: #7a2ba3; /* Color of the underline */
+        position: absolute;
+        bottom: 0; /* Position directly below the text */
+        left: 0;
+    }
+    /* Styles for home section layout */
+    @media (max-width: 2000px){
+    .home-content {
+    display: flex;
+    align-items: center;
+    gap: 689px;
+
+    
+     
+}
+}
+.text-content {
+    max-width: 60%; /* Limit text content width */
+}
+
+.profile-image {
+    max-width: 35%; /* Set max width for image */
+    height: auto;
+    border-radius: 50%; /* Circular image style */
+    border: 3px solid #ffffff;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+    .home-content {
+        flex-direction: column; /* Stack items vertically */
+        text-align: center; /* Center-align text and image */
+        gap: 20px;
+    }
+
+    .text-content, .profile-image {
+        max-width: 100%; /* Full width for text and image */
+    }
+    
+}
+.h {
+    color: #7a2ba3;
+    position: relative;
+    display: inline-block;
+}
+
+.h::after,
+.h::before {
+    content: "";
+    position: absolute;
+    background-color: #7a2ba3;
+    width: 0;
+    transition: width 0.5s ease-in-out;
+}
+
+/* First line */
+.h::after {
+    left: 0;
+    bottom: -8px; /* Distance from text */
+    height: 3px; /* Thickness of the first line */
+    animation: underline 1s ease forwards;
+}
+
+/* Second line with crossing effect */
+.h::before {
+    left: -8px; /* Shifted to create a crossing effect */
+    bottom: -5px; /* Adjust lower to intersect first line */
+    height: 3px; /* Same thickness for consistency */
+    transform: rotate(3deg); /* Angle for crossing effect */
+    animation: underline 1s ease forwards;
+}
+
+/* Keyframes for the underline animation */
+@keyframes underline {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+.skills-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Space between columns */
+}
+
+.skills-column {
+    flex: 1; /* Equal width for each column */
+    background-color: #fafafa; /* Background for each column */
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.skill {
+    margin: 10px 0; /* Space between skills */
+}
+
+.progress-bar {
+    background-color: #e0e0e0; /* Background of progress bar */
+    border-radius: 5px;
+    overflow: hidden;
+    height: 20px; /* Height of progress bar */
+    position: relative;
+    color: #7a2ba3;
+}
+
+.progress {
+    background-color: #7a2ba3; /* Color of the progress */
+    height: 100%; /* Full height of progress bar */
+    transition: width 0.5s ease-in-out; /* Smooth transition */
+}
+ 
+.skills-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Space between columns */
+    flex-wrap: wrap; /* Allow wrapping */
+}
+
+.skills-column {
+    flex: 1; /* Equal width for each column */
+    min-width: 200px; /* Minimum width to maintain layout */
+    background-color: #fafafa; /* Background for each column */
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, border-color 0.3s; /* Smooth transition for dark mode */
+}
+
+.skills-column.dark-mode {
+    background-color: #333; /* Dark background for skills columns */
+}
+
+.skill {
+    margin: 10px 0; /* Space between skills */
+}
+
+.progress-bar {
+    background-color: #e0e0e0; /* Background of progress bar */
+    border-radius: 5px;
+    overflow: hidden;
+    height: 20px; /* Height of progress bar */
+    position: relative;
+    transition: background-color 0.3s; /* Transition for dark mode */
+}
+
+.progress {
+    background-color: #7a2ba3; /* Progress color */
+    height: 100%; /* Full height */
+    width: 0; /* Start at 0 width */
+    transition: width 0.5s ease; /* Smooth width transition */
+}
+
+/* Media query for small devices */
+@media (max-width: 768px) {
+    .skills-column {
+        flex-basis: 100%; /* Full width for each column on small devices */
+        margin-bottom: 20px; /* Margin between columns */
+    }
+}
+
+/* Dark mode styles */
+body.dark-mode .skills-container {
+    background-color: #121212; /* Dark background for container */
+}
+
+body.dark-mode .skills-column {
+    background-color: #222; /* Dark background for columns */
+}
+
+body.dark-mode .progress-bar {
+    background-color: #444; /* Dark background for progress bars */
+}
+
+body.dark-mode .progress {
+    background-color: #7a2ba3; /* Progress color in dark mode */
+}
+
+/* Responsive for progress bar */
+@media (max-width: 768px) {
+    .progress-bar {
+        height: 15px; /* Adjust height for smaller screens */
+    }
+}
+
+/* Responsive for skill text */
+@media (max-width: 768px) {
+    .skill span {
+        font-size: 0.9em; /* Smaller text on small devices */
+    }
+}
+.ah3 {
+        position: relative;
+        display: inline-block; /* Make it inline for proper width */
+        padding-bottom: 5px; /* Add some space for the underline */
+    }
+
+    .ah3::after {
+        content: "";
+        display: block;
+        height: 2px; /* Adjust height for thickness */
+        width: 100%; /* Full width */
+        background-color: #7a2ba3; /* Color of the underline */
+        position: absolute;
+        bottom: 0; /* Position directly below the text */
+        left: 0;
+    }
+    .ah4 {
+        position: relative;
+        display: inline-block; /* Make it inline for proper width */
+        padding-bottom: 5px; /* Add some space for the underline */
+    }
+
+    .ah4::after {
+        content: "";
+        display: block;
+        height: 2px; /* Adjust height for thickness */
+        width: 100%; /* Full width */
+        background-color: #7a2ba3; /* Color of the underline */
+        position: absolute;
+        bottom: 0; /* Position directly below the text */
+        left: 0;
+    }
+    .ah5 {
+        position: relative;
+        display: inline-block; /* Make it inline for proper width */
+        padding-bottom: 5px; /* Add some space for the underline */
+    }
+
+    .ah5::after {
+        content: "";
+        display: block;
+        height: 2px; /* Adjust height for thickness */
+        width: 100%; /* Full width */
+        background-color: #7a2ba3; /* Color of the underline */
+        position: absolute;
+        bottom: 0; /* Position directly below the text */
+        left: 0;
+    }
+
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Gurpal Singh</div>
+        <button class="dropdown-btn" onclick="toggleDropdown()" id="dropdown-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#about"><i class="fas fa-user-circle"></i> About</a></li>
+            <li><a href="#skills"><i class="fas fa-laptop-code"></i> Skills</a></li>
+            <li><a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope-open-text"></i> Contact</a></li>
+            <li><a href="resume.pdf" class="btn" download><i class="fas fa-download"></i> Resume</a></li>
+            <li><button id="toggle-mode" class="dark-mode-btn"><i class="fas fa-moon"></i> Dark Mode</button></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="section">
+        <div class="home-content">
+            <div class="text-content">
+                <h1><i class="fa-hand-wave"></i> Hi, I'm</h1>
+                 <h1 class="h"> Gurpal Singh</h1>
+                <h2>I'm a
+                    <span style="color: #7a2ba3;" class="txt-rotate"
+                        data-period="2000"
+                        data-rotate='[ "Web Developer", "Android Developer", "Open Source Contributor ", "Wordpress Developer", "Database Developer" ]'>
+                    </span>
+                </h2>
+            </div>
+            <img src="417c6272d5856068eeb52e453681d5b3.jpg" alt="Gurpal Singh" class="profile-image">
+        </div>
+    </section>
+    
+    <section id="about" class="section">
+         
+        <h2 class="ah2">About Me</h2>
+        <p>Hello! I'm Gurpal Singh, a Computer Science student passionate about technology and software development.</p>
+        <p>I have a strong foundation in programming languages such as Java, Python, and C++. I enjoy working on projects that challenge my skills and allow me to learn new technologies.</p>
+        <p>In addition to coding, I love exploring the world of web development and am currently learning frameworks like React and Node.js.</p>
+        <p>My goal is to contribute to innovative projects and collaborate with others who share my passion for technology. In my free time, I enjoy participating in hackathons, contributing to open-source projects, and expanding my knowledge through online courses.</p>
+    </section>
+
+    <section id="skills" class="section">
+        <h2 class="ah3">Skills</h2>
+        <div class="skills-container">
+            <div class="skills-column">
+                <h3>Programming Languages</h3>
+                <div class="skill">
+                    <span>C++</span>
+                    <div class="progress-bar"><div class="progress" style="width: 60%;"></div></div>
+                </div>
+                <div class="skill">
+                    <span>Java</span>
+                    <div class="progress-bar"><div class="progress" style="width: 60%;"></div></div>
+                </div>
+                <div class="skill">
+                    <span>Python</span>
+                    <div class="progress-bar"><div class="progress" style="width: 75%;"></div></div>
+                </div>
+                <div class="skill">
+                    <span>JavaScript</span>
+                    <div class="progress-bar"><div class="progress" style="width: 75%;"></div></div>
+                </div>
+            </div>
+    
+            <div class="skills-column">
+                <h3>Web Development</h3>
+                <div class="skill">
+                    <span>HTML</span>
+                    <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+                </div>
+                <div class="skill">
+                    <span>CSS</span>
+                    <div class="progress-bar"><div class="progress" style="width: 75%;"></div></div>
+                </div>
+                <div class="skill">
+                    <span>React</span>
+                    <div class="progress-bar"><div class="progress" style="width: 70%;"></div></div>
+                </div>
+                <div class="skill">
+                    <span>Bootstrap</span>
+                    <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+                </div>
+            </div>
+    
+            <div class="skills-column">
+                <h3>Databases</h3>
+                <div class="skill">
+                    <span>MySQL</span>
+                    <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+                </div>
+                <div class="skill">
+                    <span>MongoDB</span>
+                    <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+                </div>
+                <div class="skill">
+                    <span>PostgreSQL</span>
+                    <div class="progress-bar"><div class="progress" style="width: 75%;"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+
+    <section id="projects" class="section">
+        <h2 class="ah4">Projects</h2>
+        <!-- Projects section content -->
+    </section>
+
+    <section id="contact" class="section">
+        <h2 class="ah5">Contact</h2>
+        <p>Email: your_email@example.com</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Gurpal Singh. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function toggleDropdown() {
+            const navLinks = document.getElementById('nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            document.querySelector('.navbar').classList.toggle('dark-mode');
+            document.querySelectorAll('.section').forEach(section => section.classList.toggle('dark-mode'));
+            document.querySelector('footer').classList.toggle('dark-mode');
+            document.querySelectorAll('.nav-links a').forEach(link => link.classList.toggle('dark-mode'));
+            document.getElementById('dropdown-btn').classList.toggle('dark-mode');
+        }
+ 
+        document.getElementById('toggle-mode').addEventListener('click', toggleDarkMode);
+
+        var TxtRotate = function(el, toRotate, period) {
+            this.toRotate = toRotate;
+            this.el = el;
+            this.loopNum = 0;
+            this.period = parseInt(period, 10) || 2000;
+            this.txt = '';
+            this.tick();
+            this.isDeleting = false;
+        };
+
+        TxtRotate.prototype.tick = function() {
+            var i = this.loopNum % this.toRotate.length;
+            var fullTxt = this.toRotate[i];
+
+            if (this.isDeleting) {
+                this.txt = fullTxt.substring(0, this.txt.length - 1);
+            } else {
+                this.txt = fullTxt.substring(0, this.txt.length + 1);
+            }
+
+            this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
+
+            var that = this;
+            var delta = 300 - Math.random() * 100;
+
+            if (this.isDeleting) { delta /= 2; }
+
+            if (!this.isDeleting && this.txt === fullTxt) {
+                delta = this.period;
+                this.isDeleting = true;
+            } else if (this.isDeleting && this.txt === '') {
+                this.isDeleting = false;
+                this.loopNum++;
+                delta = 500;
+            }
+
+            setTimeout(function() {
+                that.tick();
+            }, delta);
+        };
+
+        window.onload = function() {
+            var elements = document.getElementsByClassName('txt-rotate');
+            for (var i = 0; i < elements.length; i++) {
+                var toRotate = elements[i].getAttribute('data-rotate');
+                var period = elements[i].getAttribute('data-period');
+                if (toRotate) {
+                    new TxtRotate(elements[i], JSON.parse(toRotate), period);
+                }
+            }
+            // INJECT CSS
+            var css = document.createElement("style");
+            css.type = "text/css";
+            css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
+            document.body.appendChild(css);
+
+            // Add scroll event listener to show sections on scroll
+            const sections = document.querySelectorAll('.section');
+            const options = {
+                root: null,
+                threshold: 0.1 // Trigger when 10% of the section is visible
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // Add or remove 'visible' class based on scroll direction
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    } else {
+                        entry.target.classList.remove('visible');
+                    }
+                });
+            }, options);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        };
+    </script>
+</body>
+</html>
