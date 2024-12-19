@@ -3,652 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gurpal Singh - Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <title>Modern Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
-            background-color: #ffffff;
-            color: #000000;
-            transition: background-color 0.3s, color 0.3s;
+        /* Custom Scrollbar for Sidebar */
+        .scrollbar-custom::-webkit-scrollbar {
+            width: 8px;
         }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            background-color: #f0f0f0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            transition: background-color 0.3s;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #7a2ba3;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 1rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: inherit;
-            font-size: 1rem;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #8a3ab9;
-        }
-
-        .dropdown-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: inherit;
-            font-size: 1.5rem;
-            cursor: pointer;
-            margin-left: auto; /* Shift button to the right */
-            transition: color 0.3s;
-        }
-
-        .btn {
-            background-color: #8a3ab9;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            color: #ffffff;
-            font-size: 1rem;
-            transition: background-color 0.3s, transform 0.3s;
-            text-decoration: none;
-            border: 2px solid transparent;
-        }
-
-        .btn:hover {
-            background-color: #7a2ba3;
-            transform: scale(1.05);
-        }
-
-        .section {
-            padding: 50px 20px;
-            margin-top: 60px;
-            border: 2px solid #ccc;
+        .scrollbar-custom::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.2);
             border-radius: 10px;
-            background-color: #fafafa;
-            transition: border-color 0.3s, background-color 0.3s;
-            opacity: 0; /* Initially hidden */
-            transform: translateY(20px); /* Start below the view */
-            transition: opacity 0.5s, transform 0.5s; /* Animation timing */
+        }
+        .scrollbar-custom::-webkit-scrollbar-track {
+            background-color: rgba(0, 0, 0, 0.05);
         }
 
-        .section.visible {
-            opacity: 1; /* Show section */
-            transform: translateY(0); /* Move to original position */
+        /* Animated Stars */
+        @keyframes twinkling {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+        .star {
+            animation: twinkling 3s infinite;
         }
 
-        footer {
+        /* Sidebar */
+        #sidebar {
+            width: 16rem;
+            background: linear-gradient(to bottom right, #2f3542, #1e212d);
+            color: white;
+            padding: 1rem;
+            position: fixed;
+            top: 4rem;
+            left: 0;
+            height: calc(100% - 4rem);
+            overflow-y: auto;
+            border-radius: 0px;
+        }
+
+        /* Moon and Stars Styling */
+        .moon {
+            position: absolute;
+            top: 6rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: moveMoon 15s infinite ease-in-out;
+            fill: #d4d8db;
+            filter: drop-shadow(0px 0px 8px #fff);
+        }
+
+        /* Keyframes for moon animation */
+        @keyframes moveMoon {
+            0% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(30px); }
+            100% { transform: translateX(-50%) translateY(0); }
+        }
+
+        /* Star movement */
+        @keyframes starMovement {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-20px) rotate(360deg); }
+        }
+
+        .star-moving {
+            animation: twinkling 3s infinite, starMovement 5s infinite;
+        }
+
+        .star-static {
+            animation: twinkling 3s infinite;
+        }
+
+        /* Unique icon style for navbar */
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Creative Skills Section */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .skill-box {
+            background-color: #4C6A92;
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+        .skill-box:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Home Section */
+        .home-section {
+            background: #000000; 
+            position: relative;
+        }
+
+        /* About, Projects, and Contact Sections */
+        .about-project-contact-section {
+            background-color: rgb(31, 41, 55);
+        }
+
+        /* Skills Section Styling */
+        .skills-section {
+            background-color: #2d3748;  /* Darker background for Skills section */
+        }
+
+        /* Testimonials Section Styling */
+        .testimonials-section {
+            background-color: #1a202c;  /* Darker background for Testimonials */
+        }
+
+        .grouped-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .tool-category {
+            background-color: #4C6A92;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            width: 200px;
             text-align: center;
-            padding: 1rem 0;
-            background-color: #f0f0f0;
-            color: #000000;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
         }
-
-        /* Dark mode styling */
-        body.dark-mode {
-            background-color: #121212;
-            color: #ffffff;
-        }
-
-        .navbar.dark-mode {
-            background-color: #222;
-            
-        }
-
-        .section.dark-mode {
-            background-color: #222;
-            border-color: #d3d3d3;
-        }
-
-        footer.dark-mode {
-            background-color: #1f1f1f;
-            color: #ffffff;
-        }
-
-        .nav-links a.dark-mode {
-            color: #ffffff; /* Set link color in dark mode */
-        }
-
-        /* Dark mode for dropdown button */
-        .dropdown-btn.dark-mode {
-            color: #ffffff;
-        }
-
-         
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                right: 0;
-                background-color: #b697c5;
-                z-index: 999;
-                animation: dropdown 0.3s ease-out forwards;
-                box-shadow: #7a2ba3;
-                 
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .dropdown-btn {
-                display: block;
-            }
-        }
-
-        /* Dropdown animation */
-        @keyframes dropdown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .h1, .h2 {
-            font-weight: 200;
-            margin: 0.4em 0;
-        }
-        
-
-        .h1 { font-size: 3.5em; }
-        .h2 {
-            color: #888;
-            font-size: 2em;
-        }
-        .ah2 {
-        position: relative;
-        display: inline-block; /* Make it inline for proper width */
-        padding-bottom: 5px; /* Add some space for the underline */
-    }
-
-    .ah2::after {
-        content: "";
-        display: block;
-        height: 2px; /* Adjust height for thickness */
-        width: 100%; /* Full width */
-        background-color: #7a2ba3; /* Color of the underline */
-        position: absolute;
-        bottom: 0; /* Position directly below the text */
-        left: 0;
-    }
-    /* Styles for home section layout */
-    @media (max-width: 2000px){
-    .home-content {
-    display: flex;
-    align-items: center;
-    gap: 689px;
-
-    
-     
-}
-}
-.text-content {
-    max-width: 60%; /* Limit text content width */
-}
-
-.profile-image {
-    max-width: 35%; /* Set max width for image */
-    height: auto;
-    border-radius: 50%; /* Circular image style */
-    border: 3px solid #ffffff;
-}
-
-/* Responsive layout */
-@media (max-width: 768px) {
-    .home-content {
-        flex-direction: column; /* Stack items vertically */
-        text-align: center; /* Center-align text and image */
-        gap: 20px;
-    }
-
-    .text-content, .profile-image {
-        max-width: 100%; /* Full width for text and image */
-    }
-    
-}
-.h {
-    color: #7a2ba3;
-    position: relative;
-    display: inline-block;
-}
-
-.h::after,
-.h::before {
-    content: "";
-    position: absolute;
-    background-color: #7a2ba3;
-    width: 0;
-    transition: width 0.5s ease-in-out;
-}
-
-/* First line */
-.h::after {
-    left: 0;
-    bottom: -8px; /* Distance from text */
-    height: 3px; /* Thickness of the first line */
-    animation: underline 1s ease forwards;
-}
-
-/* Second line with crossing effect */
-.h::before {
-    left: -8px; /* Shifted to create a crossing effect */
-    bottom: -5px; /* Adjust lower to intersect first line */
-    height: 3px; /* Same thickness for consistency */
-    transform: rotate(3deg); /* Angle for crossing effect */
-    animation: underline 1s ease forwards;
-}
-
-/* Keyframes for the underline animation */
-@keyframes underline {
-    0% {
-        width: 0;
-    }
-    100% {
-        width: 100%;
-    }
-}
-.skills-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px; /* Space between columns */
-}
-
-.skills-column {
-    flex: 1; /* Equal width for each column */
-    background-color: #fafafa; /* Background for each column */
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.skill {
-    margin: 10px 0; /* Space between skills */
-}
-
-.progress-bar {
-    background-color: #e0e0e0; /* Background of progress bar */
-    border-radius: 5px;
-    overflow: hidden;
-    height: 20px; /* Height of progress bar */
-    position: relative;
-    color: #7a2ba3;
-}
-
-.progress {
-    background-color: #7a2ba3; /* Color of the progress */
-    height: 100%; /* Full height of progress bar */
-    transition: width 0.5s ease-in-out; /* Smooth transition */
-}
- 
-.skills-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px; /* Space between columns */
-    flex-wrap: wrap; /* Allow wrapping */
-}
-
-.skills-column {
-    flex: 1; /* Equal width for each column */
-    min-width: 200px; /* Minimum width to maintain layout */
-    background-color: #fafafa; /* Background for each column */
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s, border-color 0.3s; /* Smooth transition for dark mode */
-}
-
-.skills-column.dark-mode {
-    background-color: #333; /* Dark background for skills columns */
-}
-
-.skill {
-    margin: 10px 0; /* Space between skills */
-}
-
-.progress-bar {
-    background-color: #e0e0e000; /* Background of progress bar */
-    border-radius: 5px;
-    overflow: hidden;
-    height: 20px; /* Height of progress bar */
-    position: relative;
-    transition: background-color 0.3s; /* Transition for dark mode */
-}
-
-.progress {
-    background-color: #7a2ba3; /* Progress color */
-    height: 100%; /* Full height */
-    width: 0; /* Start at 0 width */
-    transition: width 0.5s ease; /* Smooth width transition */
-}
-
-/* Media query for small devices */
-@media (max-width: 768px) {
-    .skills-column {
-        flex-basis: 100%; /* Full width for each column on small devices */
-        margin-bottom: 20px; /* Margin between columns */
-    }
-}
-
-/* Dark mode styles */
-body.dark-mode .skills-container {
-    background-color: #121212; /* Dark background for container */
-}
-
-body.dark-mode .skills-column {
-    background-color: #222; /* Dark background for columns */
-}
-
-body.dark-mode .progress-bar {
-    background-color: #444; /* Dark background for progress bars */
-}
-
-body.dark-mode .progress {
-    background-color: #7a2ba3; /* Progress color in dark mode */
-}
-
-/* Responsive for progress bar */
-@media (max-width: 768px) {
-    .progress-bar {
-        height: 15px; /* Adjust height for smaller screens */
-    }
-}
-
-/* Responsive for skill text */
-@media (max-width: 768px) {
-    .skill span {
-        font-size: 0.9em; /* Smaller text on small devices */
-    }
-}
-.ah3 {
-        position: relative;
-        display: inline-block; /* Make it inline for proper width */
-        padding-bottom: 5px; /* Add some space for the underline */
-    }
-
-    .ah3::after {
-        content: "";
-        display: block;
-        height: 2px; /* Adjust height for thickness */
-        width: 100%; /* Full width */
-        background-color: #7a2ba3; /* Color of the underline */
-        position: absolute;
-        bottom: 0; /* Position directly below the text */
-        left: 0;
-    }
-    .ah4 {
-        position: relative;
-        display: inline-block; /* Make it inline for proper width */
-        padding-bottom: 5px; /* Add some space for the underline */
-    }
-
-    .ah4::after {
-        content: "";
-        display: block;
-        height: 2px; /* Adjust height for thickness */
-        width: 100%; /* Full width */
-        background-color: #7a2ba3; /* Color of the underline */
-        position: absolute;
-        bottom: 0; /* Position directly below the text */
-        left: 0;
-    }
-    .ah5 {
-        position: relative;
-        display: inline-block; /* Make it inline for proper width */
-        padding-bottom: 5px; /* Add some space for the underline */
-    }
-
-    .ah5::after {
-        content: "";
-        display: block;
-        height: 2px; /* Adjust height for thickness */
-        width: 100%; /* Full width */
-        background-color: #7a2ba3; /* Color of the underline */
-        position: absolute;
-        bottom: 0; /* Position directly below the text */
-        left: 0;
-    }
-
-
     </style>
 </head>
-<body>
-    <nav class="navbar">
-        <div class="logo">Gurpal Singh</div>
-        <button class="dropdown-btn" onclick="toggleDropdown()" id="dropdown-btn">
-            <i class="fas fa-bars"></i>
-        </button>
-        <ul class="nav-links" id="nav-links">
-            <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="#about"><i class="fas fa-user-circle"></i> About</a></li>
-            <li><a href="#skills"><i class="fas fa-laptop-code"></i> Skills</a></li>
-            <li><a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
-            <li><a href="#contact"><i class="fas fa-envelope-open-text"></i> Contact</a></li>
-            <li><a href="resume.pdf" class="btn" download><i class="fas fa-download"></i> Resume</a></li>
-            <li><button id="toggle-mode" class="dark-mode-btn"><i class="fas fa-moon"></i> Dark Mode</button></li>
-        </ul>
-    </nav>
+<body class="bg-gradient-to-b from-indigo-900 via-indigo-800 to-black font-sans text-white">
 
-    <section id="home" class="section">
-        <div class="home-content">
-            <div class="text-content">
-                <h1><i class="fa-hand-wave"></i> Hi, I'm</h1>
-                 <h1 class="h"> Gurpal Singh</h1>
-                <h2>I'm a
-                    <span style="color: #7a2ba3;" class="txt-rotate"
-                        data-period="2000"
-                        data-rotate='[ "Web Developer", "Android Developer", "Open Source Contributor ", "Wordpress Developer", "Database Developer" ]'>
-                    </span>
-                </h2>
-            </div>
-            <img src="GurpalSingh1/Portfolio/a.jpg" width = 400 height = 400 ="Gurpal Singh" class="profile-image">
+    <!-- Main Wrapper -->
+    <div class="flex min-h-screen relative">
+
+        <!-- Sidebar -->
+        <div id="sidebar" class="w-64 bg-gradient-to-br from-gray-800 to-gray-900 text-white p-4 fixed top-16 left-0 h-[calc(100%-4rem)] overflow-y-auto scrollbar-custom flex flex-col items-center">
+            <nav class="flex flex-col space-y-6">
+                <a href="https://www.linkedin.com" target="_blank" class="flex items-center space-x-3 hover:text-indigo-400">
+                    <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="LinkedIn" class="w-6 h-6">
+                    <span>LinkedIn</span>
+                </a>
+                <a href="https://github.com" target="_blank" class="flex items-center space-x-3 hover:text-indigo-400">
+                    <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="GitHub" class="w-6 h-6">
+                    <span>GitHub</span>
+                </a>
+                <a href="https://www.facebook.com" target="_blank" class="flex items-center space-x-3 hover:text-indigo-400">
+                    <img src="https://img.icons8.com/ios-filled/50/ffffff/facebook.png" alt="Facebook" class="w-6 h-6">
+                    <span>Facebook</span>
+                </a>
+                <a href="https://www.whatsapp.com" target="_blank" class="flex items-center space-x-3 hover:text-indigo-400">
+                    <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp" class="w-6 h-6">
+                    <span>WhatsApp</span>
+                </a>
+            </nav>
         </div>
-    </section>
-    
-    <section id="about" class="section">
-         
-        <h2 class="ah2">About Me</h2>
-        <p>Hello! I'm Gurpal Singh, a Computer Science student passionate about technology and software development.</p>
-        <p>I have a strong foundation in programming languages such as Java, Python, and C++. I enjoy working on projects that challenge my skills and allow me to learn new technologies.</p>
-        <p>In addition to coding, I love exploring the world of web development and am currently learning frameworks like React and Node.js.</p>
-        <p>My goal is to contribute to innovative projects and collaborate with others who share my passion for technology. In my free time, I enjoy participating in hackathons, contributing to open-source projects, and expanding my knowledge through online courses.</p>
-    </section>
 
-    <section id="skills" class="section">
-        <h2 class="ah3">Skills</h2>
-        <div class="skills-container">
-            <div class="skills-column">
-                <h3>Programming Languages</h3>
-                <div class="skill">
-                    <span>C++</span>
-                    <div class="progress-bar"><div class="progress" style="width: 60%;"></div></div>
+        <!-- Main Content -->
+        <div class="ml-64 w-full">
+            <!-- Navbar -->
+            <header class="fixed top-0 left-0 right-0 bg-gray-900 shadow-md z-10 flex justify-between items-center px-6 py-4">
+                <h2 class="text-xl font-bold text-white">Portfolio</h2>
+                <nav>
+                    <ul class="flex space-x-6">
+                        <li><a href="#home" class="flex items-center space-x-2 text-gray-300 hover:text-white">
+                            <img src="https://img.icons8.com/ios-filled/24/ffffff/home.png" alt="Home" class="nav-icon">
+                            <span>Home</span>
+                        </a></li>
+                        <li><a href="#about" class="flex items-center space-x-2 text-gray-300 hover:text-white">
+                            <img src="https://img.icons8.com/ios-filled/24/ffffff/info.png" alt="About" class="nav-icon">
+                            <span>About</span>
+                        </a></li>
+                        <li><a href="#skills" class="flex items-center space-x-2 text-gray-300 hover:text-white">
+                            <img src="https://img.icons8.com/ios-filled/24/ffffff/brain.png" alt="Skills" class="nav-icon">
+                            <span>Skills</span>
+                        </a></li>
+                        <li><a href="#projects" class="flex items-center space-x-2 text-gray-300 hover:text-white">
+                            <img src="https://img.icons8.com/ios-filled/24/ffffff/project.png" alt="Projects" class="nav-icon">
+                            <span>Projects</span>
+                        </a></li>
+                        <li><a href="#testimonials" class="flex items-center space-x-2 text-gray-300 hover:text-white">
+                            <img src="https://img.icons8.com/ios-filled/24/ffffff/star.png" alt="Testimonials" class="nav-icon">
+                            <span>Testimonials</span>
+                        </a></li>
+                        <li><a href="#contact" class="flex items-center space-x-2 text-gray-300 hover:text-white">
+                            <img src="https://img.icons8.com/ios-filled/24/ffffff/contact-card.png" alt="Contact" class="nav-icon">
+                            <span>Contact</span>
+                        </a></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <!-- Sections -->
+
+            <!-- Home Section -->
+            <section id="home" class="min-h-screen flex flex-col justify-center items-center home-section relative">
+                <svg class="absolute w-full h-full inset-0">
+                    <!-- Static Stars -->
+                    <circle class="star-static fill-white opacity-50" cx="20" cy="30" r="2"></circle>
+                    <circle class="star-static fill-white opacity-50" cx="120" cy="130" r="3"></circle>
+                    <circle class="star-static fill-white opacity-50" cx="220" cy="230" r="2"></circle>
+                    <circle class="star-static fill-white opacity-50" cx="320" cy="330" r="3"></circle>
+
+                    <!-- Moving Stars -->
+                    <circle class="star-moving fill-white opacity-60" cx="300" cy="50" r="2"></circle>
+                    <circle class="star-moving fill-white opacity-60" cx="400" cy="150" r="3"></circle>
+                    <circle class="star-moving fill-white opacity-60" cx="500" cy="250" r="2"></circle>
+                    <circle class="star-moving fill-white opacity-60" cx="600" cy="350" r="3"></circle>
+                </svg>
+                <!-- Moon -->
+                <svg class="moon w-24 h-24 fill-white opacity-80" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="30" />
+                </svg>
+                <h1 class="text-5xl font-bold text-indigo-400">Welcome to My Portfolio</h1>
+                <p class="text-lg text-gray-400 mt-4">Showcasing skills, projects, and achievements.</p>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="min-h-screen flex flex-col justify-center items-center about-project-contact-section text-center py-12">
+                <h2 class="text-3xl font-semibold text-indigo-400">About Me</h2>
+                <p class="text-lg text-gray-400 mt-4 max-w-2xl">I am a passionate developer with experience in web and software development. I enjoy solving problems and building applications that are both functional and visually appealing. My goal is to continuously learn and grow as a developer.</p>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="min-h-screen skills-section flex flex-col justify-center items-center text-center py-12">
+                <h2 class="text-3xl font-semibold text-indigo-400">Skills</h2>
+                <div class="grouped-tools">
+                    <div class="tool-category">
+                        <h3 class="text-lg font-semibold text-indigo-400">Frontend Tools</h3>
+                        <ul>
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>JavaScript</li>
+                            <li>React</li>
+                        </ul>
+                    </div>
+                    <div class="tool-category">
+                        <h3 class="text-lg font-semibold text-indigo-400">Backend Tools</h3>
+                        <ul>
+                            <li>Node.js</li>
+                            <li>MongoDB</li>
+                            <li>Express.js</li>
+                        </ul>
+                    </div>
+                    <div class="tool-category">
+                        <h3 class="text-lg font-semibold text-indigo-400">Other Tools</h3>
+                        <ul>
+                            <li>Git</li>
+                            <li>Docker</li>
+                            <li>Webpack</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="skill">
-                    <span>Java</span>
-                    <div class="progress-bar"><div class="progress" style="width: 60%;"></div></div>
+            </section>
+
+            <!-- Testimonials Section -->
+            <section id="testimonials" class="min-h-screen testimonials-section flex flex-col justify-center items-center text-center py-12">
+                <h2 class="text-3xl font-semibold text-indigo-400">Testimonials</h2>
+                <p class="text-lg text-gray-400 mt-4 max-w-2xl">Here's what others are saying about my work:</p>
+                
+                <div class="mt-8 flex space-x-8">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-gray-900 text-white p-6 rounded-lg shadow-lg max-w-xs">
+                        <p class="text-lg italic">"Working with this developer was an amazing experience. Their attention to detail and creativity are unmatched."</p>
+                        <h3 class="mt-4 text-xl font-semibold text-indigo-400">John Doe</h3>
+                        <p class="text-sm text-gray-400">CEO, TechCorp</p>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="bg-gray-900 text-white p-6 rounded-lg shadow-lg max-w-xs">
+                        <p class="text-lg italic">"The project exceeded our expectations, and the collaboration was seamless. Highly recommend!"</p>
+                        <h3 class="mt-4 text-xl font-semibold text-indigo-400">Jane Smith</h3>
+                        <p class="text-sm text-gray-400">Lead Developer, InnovateTech</p>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="bg-gray-900 text-white p-6 rounded-lg shadow-lg max-w-xs">
+                        <p class="text-lg italic">"A true professional with an eye for design. Every project is handled with care and expertise."</p>
+                        <h3 class="mt-4 text-xl font-semibold text-indigo-400">Samuel Johnson</h3>
+                        <p class="text-sm text-gray-400">CTO, DevSolutions</p>
+                    </div>
                 </div>
-                <div class="skill">
-                    <span>Python</span>
-                    <div class="progress-bar"><div class="progress" style="width: 75%;"></div></div>
-                </div>
-                <div class="skill">
-                    <span>JavaScript</span>
-                    <div class="progress-bar"><div class="progress" style="width: 75%;"></div></div>
-                </div>
-            </div>
-    
-            <div class="skills-column">
-                <h3>Web Development</h3>
-                <div class="skill">
-                    <span>HTML</span>
-                    <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
-                </div>
-                <div class="skill">
-                    <span>CSS</span>
-                    <div class="progress-bar"><div class="progress" style="width: 75%;"></div></div>
-                </div>
-                <div class="skill">
-                    <span>React</span>
-                    <div class="progress-bar"><div class="progress" style="width: 70%;"></div></div>
-                </div>
-                <div class="skill">
-                    <span>Bootstrap</span>
-                    <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
-                </div>
-            </div>
-    
-            <div class="skills-column">
-                <h3>Databases</h3>
-                <div class="skill">
-                    <span>MySQL</span>
-                    <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
-                </div>
-                <div class="skill">
-                    <span>MongoDB</span>
-                    <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
-                </div>
-                <div class="skill">
-                    <span>PostgreSQL</span>
-                    <div class="progress-bar"><div class="progress" style="width: 75%;"></div></div>
-                </div>
-            </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="min-h-screen about-project-contact-section flex flex-col justify-center items-center text-center py-12">
+                <h2 class="text-3xl font-semibold text-indigo-400">Contact Me</h2>
+                <p class="text-lg text-gray-400 mt-4 max-w-2xl">Feel free to reach out to me for collaboration or inquiries. You can contact me via email or any of the social media platforms listed in the sidebar.</p>
+            </section>
         </div>
-    </section>
-    
-    
-
-    <section id="projects" class="section">
-        <h2 class="ah4">Projects</h2>
-        <!-- Projects section content -->
-    </section>
-
-    <section id="contact" class="section">
-        <h2 class="ah5">Contact</h2>
-        <p>Email: your_email@example.com</p>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 Gurpal Singh. All Rights Reserved.</p>
-    </footer>
-
-    <script>
-        function toggleDropdown() {
-            const navLinks = document.getElementById('nav-links');
-            navLinks.classList.toggle('active');
-        }
-
-        
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-            document.querySelector('.navbar').classList.toggle('dark-mode');
-            document.querySelectorAll('.section').forEach(section => section.classList.toggle('dark-mode'));
-            document.querySelector('footer').classList.toggle('dark-mode');
-            document.querySelectorAll('.nav-links a').forEach(link => link.classList.toggle('dark-mode'));
-            document.getElementById('dropdown-btn').classList.toggle('dark-mode');
-        }
- 
-        document.getElementById('toggle-mode').addEventListener('click', toggleDarkMode);
-
-        var TxtRotate = function(el, toRotate, period) {
-            this.toRotate = toRotate;
-            this.el = el;
-            this.loopNum = 0;
-            this.period = parseInt(period, 10) || 2000;
-            this.txt = '';
-            this.tick();
-            this.isDeleting = false;
-        };
-
-        TxtRotate.prototype.tick = function() {
-            var i = this.loopNum % this.toRotate.length;
-            var fullTxt = this.toRotate[i];
-
-            if (this.isDeleting) {
-                this.txt = fullTxt.substring(0, this.txt.length - 1);
-            } else {
-                this.txt = fullTxt.substring(0, this.txt.length + 1);
-            }
-
-            this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
-
-            var that = this;
-            var delta = 300 - Math.random() * 100;
-
-            if (this.isDeleting) { delta /= 2; }
-
-            if (!this.isDeleting && this.txt === fullTxt) {
-                delta = this.period;
-                this.isDeleting = true;
-            } else if (this.isDeleting && this.txt === '') {
-                this.isDeleting = false;
-                this.loopNum++;
-                delta = 500;
-            }
-
-            setTimeout(function() {
-                that.tick();
-            }, delta);
-        };
-
-        window.onload = function() {
-            var elements = document.getElementsByClassName('txt-rotate');
-            for (var i = 0; i < elements.length; i++) {
-                var toRotate = elements[i].getAttribute('data-rotate');
-                var period = elements[i].getAttribute('data-period');
-                if (toRotate) {
-                    new TxtRotate(elements[i], JSON.parse(toRotate), period);
-                }
-            }
-            // INJECT CSS
-            var css = document.createElement("style");
-            css.type = "text/css";
-            css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
-            document.body.appendChild(css);
-
-            // Add scroll event listener to show sections on scroll
-            const sections = document.querySelectorAll('.section');
-            const options = {
-                root: null,
-                threshold: 0.1 // Trigger when 10% of the section is visible
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    // Add or remove 'visible' class based on scroll direction
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    } else {
-                        entry.target.classList.remove('visible');
-                    }
-                });
-            }, options);
-
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-        };
-    </script>
+    </div>
 </body>
 </html>
